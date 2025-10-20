@@ -7,7 +7,7 @@ export const LOTO_CONFIG = {
   MIN_NUMBER: 1,
   MAX_NUMBER: 49,
   DRAW_COUNT: 5,
-  MAX_SELECTION: 10,
+  MAX_SELECTION: 9,
 };
 
 // DOM selectors

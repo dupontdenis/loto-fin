@@ -4,7 +4,7 @@
 
 import { getElement } from "./domUtils.mjs";
 import { SELECTORS, CSS_CLASSES } from "./constants.mjs";
-import { GAINS } from "./gains.mjs";
+import { GAINS, COSTS } from "./gains.mjs";
 
 /**
  * Calculate intersection between two sets
@@ -46,8 +46,11 @@ function displayResults(matchCount, matches, selectedSet, drawnNumbers) {
   const sortedSelected = Array.from(selectedSet).sort((a, b) => a - b);
   const sortedDrawn = Array.from(drawnNumbers).sort((a, b) => a - b);
 
-  // Get gain from Map
+  // Get gain and cost from Maps
   const gain = GAINS.get(matchCount);
+  const numberOfSelections = selectedSet.size;
+  const cost = COSTS.get(numberOfSelections) || 0;
+  const netProfit = gain - cost;
 
   const matchedNumbersHTML =
     matchCount > 0
@@ -61,10 +64,18 @@ function displayResults(matchCount, matches, selectedSet, drawnNumbers) {
   resultsDiv.innerHTML = `
     <h3>Results</h3>
     <div class="match-count">${matchCount} / 5</div>
+    <p style="font-size: 20px; margin: 10px 0; color: #cc002c;">
+      Cost: ${cost} €
+    </p>
     <p style="font-size: 24px; font-weight: bold; color: ${
       gain > 0 ? "#008004" : "#666"
     };">
       Gain: ${gain} €
+    </p>
+    <p style="font-size: 28px; font-weight: bold; margin: 15px 0; color: ${
+      netProfit > 0 ? "#008004" : netProfit < 0 ? "#cc002c" : "#666"
+    };">
+      Net: ${netProfit > 0 ? "+" : ""}${netProfit} €
     </p>
     ${matchedNumbersHTML}
     <p style="margin-top: 20px; font-size: 14px; color: #666;">
@@ -76,6 +87,6 @@ function displayResults(matchCount, matches, selectedSet, drawnNumbers) {
   console.log(
     `Matches: ${matchCount} numbers - ${sortedMatches.join(
       ", "
-    )} - Gain: ${gain}€`
+    )} - Cost: ${cost}€ - Gain: ${gain}€ - Net: ${netProfit}€`
   );
 }

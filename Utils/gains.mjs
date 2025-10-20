@@ -14,3 +14,11 @@ export const GAINS = new Map([
   [4, 500],
   [5, 1000000],
 ]);
+
+export const COSTS = new Map([
+  [5, 2],
+  [6, 12],
+  [7, 42],
+  [8, 112],
+  [9, 252]
+]);
