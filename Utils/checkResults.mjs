@@ -76,7 +76,7 @@ function displayResults(matchCount, matches, selectedSet, drawnNumbers) {
     ${matchedNumbersHTML}
     <p style="margin-top: 20px; font-size: 14px; color: #666;">
       Your numbers: ${sortedSelected.join(", ")}<br>
-      Drawn numbers: ${sortedDrawn.join(", ")}
+      LOTO : ${sortedDrawn.join(", ")}
     </p>
   `;
 
